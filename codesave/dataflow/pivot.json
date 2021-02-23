@@ -1,0 +1,38 @@
+{
+	"name": "pivot",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "pivot",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "opfiles",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Pivot1"
+				},
+				{
+					"name": "SurrogateKey1"
+				},
+				{
+					"name": "Rank1"
+				}
+			],
+			"script": "source(output(\n\t\tyear as string,\n\t\tmonth as string,\n\t\tsalesamount as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tignoreNoFilesFound: false) ~> source1\nsource1 pivot(groupBy(year),\n\tpivotBy(month),\n\tTotalsalesamount = sum(toInteger(salesamount)),\n\tcolumnNaming: '$N$V',\n\tlateral: true) ~> Pivot1\nPivot1 keyGenerate(output(year as long),\n\tstartAt: 100L,\n\tpartitionBy('hash', 1)) ~> SurrogateKey1\nsource1 rank(asc(salesamount, true),\n\toutput(year as long),\n\tdense: true) ~> Rank1\nRank1 sink(allowSchemaDrift: true,\n\tvalidateSchema: true,\n\tpartitionFileNames:['pivotexample'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+		}
+	}
+}

@@ -1,0 +1,27 @@
+{
+	"name": "internalssis",
+	"properties": {
+		"type": "Managed",
+		"typeProperties": {
+			"computeProperties": {
+				"location": "Central US",
+				"nodeSize": "Standard_D2_v3",
+				"numberOfNodes": 1,
+				"maxParallelExecutionsPerNode": 4
+			},
+			"ssisProperties": {
+				"catalogInfo": {
+					"catalogServerEndpoint": "baluazurepractice.database.windows.net",
+					"catalogAdminUserName": "balaram",
+					"catalogAdminPassword": {
+						"type": "SecureString",
+						"value": "**********"
+					},
+					"catalogPricingTier": "S1"
+				},
+				"edition": "Standard",
+				"licenseType": "LicenseIncluded"
+			}
+		}
+	}
+}

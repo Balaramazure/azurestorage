@@ -1,0 +1,52 @@
+{
+	"name": "join_df",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "indiafilesread",
+						"type": "DatasetReference"
+					},
+					"name": "salesinfo"
+				},
+				{
+					"dataset": {
+						"referenceName": "custinfo",
+						"type": "DatasetReference"
+					},
+					"name": "custinfo"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "sample",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "unmatched",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Join1"
+				},
+				{
+					"name": "ConditionalSplit1"
+				},
+				{
+					"name": "Lookup1"
+				}
+			],
+			"script": "source(output(\n\t\tID as string,\n\t\tPNAME as string,\n\t\tsalesamount as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tignoreNoFilesFound: false) ~> salesinfo\nsource(output(\n\t\tID as string,\n\t\tName as string,\n\t\taddress as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tignoreNoFilesFound: false) ~> custinfo\nsalesinfo, custinfo join(salesinfo@ID == custinfo@ID,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join1\nJoin1 split(salesamount>='2000',\n\tdisjoint: true) ~> ConditionalSplit1@(test1, test2)\nsalesinfo, custinfo lookup(salesinfo@ID == custinfo@ID,\n\tmultiple: false,\n\tpickup: 'any',\n\tbroadcast: 'auto')~> Lookup1\nConditionalSplit1@test1 sink(input(\n\t\tColumn_1 as string,\n\t\tColumn_2 as string,\n\t\tColumn_3 as string,\n\t\tColumn_4 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tpartitionFileNames:['custinfo'],\n\ttruncate: true,\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1\nLookup1 sink(allowSchemaDrift: true,\n\tvalidateSchema: true,\n\tpartitionFileNames:['unmatchedop'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink2"
+		}
+	}
+}

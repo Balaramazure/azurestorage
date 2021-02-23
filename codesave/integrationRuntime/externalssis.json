@@ -1,0 +1,6 @@
+{
+	"name": "externalssis",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
