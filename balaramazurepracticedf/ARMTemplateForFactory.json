@@ -523,6 +523,10 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureFileStorageLocation",
+						"fileName": {
+							"value": "@item.name()",
+							"type": "Expression"
+						},
 						"folderPath": "samplefiles"
 					},
 					"columnDelimiter": ",",
