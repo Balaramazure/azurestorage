@@ -115,8 +115,8 @@
 							]
 						},
 						{
-							"name": "Lookup2",
-							"type": "Lookup",
+							"name": "Stored procedure1",
+							"type": "SqlServerStoredProcedure",
 							"dependsOn": [
 								{
 									"activity": "Copy data1",
@@ -134,20 +134,27 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"source": {
-									"type": "AzureSqlSource",
-									"sqlReaderQuery": {
-										"value": "@concat('update metadatainfo', 'set Load_flag=''y''')",
-										"type": "Expression"
+								"storedProcedureName": "[dbo].[usp_metadatainfoupdate]",
+								"storedProcedureParameters": {
+									"schename": {
+										"value": {
+											"value": "@item().table_schema",
+											"type": "Expression"
+										},
+										"type": "String"
 									},
-									"queryTimeout": "02:00:00",
-									"partitionOption": "None"
-								},
-								"dataset": {
-									"referenceName": "AzureSqlTable1",
-									"type": "DatasetReference"
-								},
-								"firstRowOnly": false
+									"tablename": {
+										"value": {
+											"value": "@item().table_name",
+											"type": "Expression"
+										},
+										"type": "String"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "AzureSqlDatabase1",
+								"type": "LinkedServiceReference"
 							}
 						}
 					]
