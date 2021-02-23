@@ -69,10 +69,6 @@
 										"type": "AzureFileStorageReadSettings",
 										"recursive": true,
 										"wildcardFolderPath": "samplefiles",
-										"wildcardFileName": {
-											"value": "@item().name",
-											"type": "Expression"
-										},
 										"enablePartitionDiscovery": false
 									},
 									"formatSettings": {
