@@ -10,10 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureFileStorageLocation",
-				"fileName": {
-					"value": "@dataset().filename",
-					"type": "Expression"
-				},
 				"folderPath": "samplefiles"
 			},
 			"columnDelimiter": ",",
