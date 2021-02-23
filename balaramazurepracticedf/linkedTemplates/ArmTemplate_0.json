@@ -583,7 +583,7 @@
 								"parameters": {}
 							},
 							"fieldList": [
-								"exists"
+								"childItems"
 							],
 							"storeSettings": {
 								"type": "AzureFileStorageReadSettings",
@@ -727,7 +727,7 @@
 						"type": "Array"
 					},
 					"file_copy": {
-						"type": "Boolean"
+						"type": "Array"
 					}
 				},
 				"annotations": [],
