@@ -20,6 +20,15 @@
 		"filesread_connectionString": {
 			"value": ""
 		},
+		"productinfo_connectionString": {
+			"value": ""
+		},
+		"productinfo_password": {
+			"value": ""
+		},
+		"productinfo_properties_typeProperties_userName": {
+			"value": "balaram"
+		},
 		"internalssis_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
 			"value": "baluazurepractice.database.windows.net"
 		},

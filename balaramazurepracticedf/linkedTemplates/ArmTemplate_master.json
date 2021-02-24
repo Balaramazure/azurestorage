@@ -27,6 +27,18 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'filesread'"
 		},
+		"productinfo_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'productinfo'"
+		},
+		"productinfo_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'productinfo'"
+		},
+		"productinfo_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "balaram"
+		},
 		"internalssis_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
 			"type": "string",
 			"defaultValue": "baluazurepractice.database.windows.net"
@@ -79,6 +91,15 @@
 					},
 					"filesread_connectionString": {
 						"value": "[parameters('filesread_connectionString')]"
+					},
+					"productinfo_connectionString": {
+						"value": "[parameters('productinfo_connectionString')]"
+					},
+					"productinfo_password": {
+						"value": "[parameters('productinfo_password')]"
+					},
+					"productinfo_properties_typeProperties_userName": {
+						"value": "[parameters('productinfo_properties_typeProperties_userName')]"
 					},
 					"internalssis_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
 						"value": "[parameters('internalssis_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]"
