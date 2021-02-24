@@ -7,7 +7,30 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": []
+		"schema": [
+			{
+				"name": "TABLE_SCHEMA",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TABLE_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "filedate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Load_flag",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "metadatainfo"
+		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }

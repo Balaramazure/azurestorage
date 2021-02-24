@@ -67,7 +67,7 @@
 									"type": "DelimitedTextSource",
 									"storeSettings": {
 										"type": "AzureFileStorageReadSettings",
-										"recursive": true,
+										"recursive": false,
 										"wildcardFolderPath": "samplefiles",
 										"wildcardFileName": {
 											"value": "@item().name",
