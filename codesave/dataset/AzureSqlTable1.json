@@ -26,7 +26,11 @@
 				"name": "Load_flag",
 				"type": "varchar"
 			}
-		]
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "pipeline_log"
+		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }
